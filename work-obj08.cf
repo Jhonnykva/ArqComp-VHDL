@@ -1,0 +1,4 @@
+v 4
+file / "c:\Users\Godilver\OneDrive\Documentos\GitHub\Projeto-VHDL\ArqComp-VHDL\reg16bits.vhd" "66388406024306f2831df18521074d717779e574" "20211103192250.307":
+  entity reg16bits at 4( 97) + 0 on 11;
+  architecture a_reg16bits of reg16bits at 17( 437) + 0 on 12;

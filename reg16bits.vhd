@@ -1,3 +1,6 @@
+--Alunos: Gabriel Henrique Kwiatkovski Godinho
+--        Jhonny Kristyan Vaz-Tostes de Assis
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -12,14 +15,14 @@ entity reg16bits is
 end entity;
 
 architecture a_reg16bits of reg16bits is
-    signal registro: unsigned(7 downto 0);
+    signal registro: unsigned(15 downto 0);
 
 begin 
 
     process(clk, rst, wr_enable)
     begin   
         if rst='1' then
-            regutro <= "0000000000000000";
+            registro <= "0000000000000000";
         elsif wr_enable='1' then
             if rising_edge(clk) then
                 registro <=data_in;
