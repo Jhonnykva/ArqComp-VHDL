@@ -1,0 +1,10 @@
+v 4
+file . "gerenciador_tb.vhd" "4a3fc3b3b373d2434ee7a07338a84aca3691aab2" "20211104012348.314":
+  entity gerenciador_tb at 4( 97) + 0 on 29;
+  architecture a_gerenciador_tb of gerenciador_tb at 12( 208) + 0 on 30;
+file . "reg16bits.vhd" "66388406024306f2831df18521074d717779e574" "20211104011058.608":
+  entity reg16bits at 4( 97) + 0 on 17;
+  architecture a_reg16bits of reg16bits at 17( 437) + 0 on 18;
+file . "bancoDeReg.vhd" "501246b7c173f0e6be0143cf0a14afb9d00a7237" "20211104012317.939":
+  entity bancodereg at 4( 97) + 0 on 27;
+  architecture a_bancodereg of bancodereg at 20( 571) + 0 on 28;

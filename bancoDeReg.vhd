@@ -6,17 +6,28 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity bancoDeReg is
-end;
+    port(   reg_in_1 : in unsigned(15 downto 0);
+            reg_in_2 : in unsigned(15 downto 0);
+            reg_out : out unsigned(15 downto 0);
+            
+            select_reg_1 : in unsigned(2 downto 0);
+            select_reg_2 : in unsigned(2 downto 0);
+            select_reg_3 : in unsigned(2 downto 0);
+
+            rst_reg : in std_logic);
+end entity;
 
 architecture a_bancoDeReg of bancoDeReg is
+    -------------------------COMPONENTES------------------------
     component reg16bits
         port(   clk      : in std_logic;
                 rst       : in std_logic;
                 wr_enable : in std_logic;
                 data_in   : in unsigned(15 downto 0);
-                data_out  : out unsigned(15 downto 0);
+                data_out  : out unsigned(15 downto 0));
     end component;
     
+    ------------------------ SINAIS----------------------
     constant period_time : time := 100 ns;
     signal finished : std_logic := '0';
     signal clk, reset : std_logic;
@@ -25,16 +36,31 @@ architecture a_bancoDeReg of bancoDeReg is
             wr_enable_5,wr_enable_6,wr_enable_7,wr_enable_0: std_logic :='0';
         
     signal  data_in_1,data_in_2,data_in_3,data_in_4,
-            data_in_5,data_in_6,data_in_7: signed (15 downto 0);
+            data_in_5,data_in_6,data_in_7: unsigned (15 downto 0);
 
     signal  data_out_1,data_out_2,data_out_3,data_out_4,
-            data_out_5,data_out_6,data_out_7,data_out_0,: signed (15 downto 0);
+            data_out_5,data_out_6,data_out_7,data_out_0: unsigned (15 downto 0);
 
-    constant data_in_0 : signed (15 downto 0) :='0000000000000000';--registrador 0 é constante
+    constant data_in_0 : unsigned (15 downto 0) :="0000000000000000";--registrador 0 é constante
 
 
 begin
-    
+    -- wr_enable já está funcionando, falta agora os outros sinais
+    wr_enable_1 <= '1' when select_reg_3="001"else
+                    '0';
+    wr_enable_2 <= '1' when select_reg_3="010"else
+                    '0';
+    wr_enable_3 <= '1' when select_reg_3="011"else
+                    '0';
+    wr_enable_4 <= '1' when select_reg_3="100"else
+                    '0';
+    wr_enable_5 <= '1' when select_reg_3="101"else
+                    '0';
+    wr_enable_6 <= '1' when select_reg_3="110"else
+                    '0';            
+    wr_enable_7 <= '1' when select_reg_3="111"else
+                    '0';
+    ----------------------INSTANCIAS------------------------
     reg1: reg16bits port map (  clk=>clk,
                                 rst=>reset,
                                 wr_enable=>wr_enable_1,
@@ -90,7 +116,11 @@ begin
                                 data_in=>data_in_0,
                                 data_out=>data_out_0
                             );
-                            
+
+end architecture a_bancoDeReg;
+
+
+
                
 
     
