@@ -53,13 +53,17 @@ architecture a_gerenciador of gerenciador is
                 out_op_2 : out std_logic);
     end component;
 
-    signal sreg_1, sreg_2, sreg_3, sULA_out_1: signed (15 downto 0);
+
+ 
     signal sselect_reg_1, sselect_reg_2, sselect_reg_3: unsigned(2 downto 0);
-    signal swr_enable, srst_reg, sclk_reg, sselect_op_1, sselect_op_2, sULA_out_2 : std_logic;
+    signal swr_enable, srst_reg, sclk_reg : std_logic;
+    signal bancoRegToUla_1, bancoRegToUla_2, sULA_out_1 : signed (15 downto 0);
+    signal sselect_op_1, sselect_op_2, sULA_out_2 : std_logic;
+    signal reg_write_3, sreg_1, sreg_2 : signed (15 downto 0);
 
 begin
     --valores dos registradores
-    sreg_3 <= reg_3;
+    reg_write_3 <= reg_3;
 
     --id do registrador
     sselect_reg_1 <= select_reg_1;
@@ -75,17 +79,11 @@ begin
     srst_reg <= rst_reg;
     sclk_reg <= clk_reg;
 
-    ula1: ULA port map  (   in_termo_1=>sreg_1,
-                            in_termo_2=>sreg_2,
-                            select_op_1=>sselect_op_1,
-                            select_op_2=>sselect_op_2,
-                            out_op_1=>sULA_out_1,
-                            out_op_2=>sULA_out_2
-                        );
+    
 
     bancoReg1: bancoDeReg port map  (   reg_read_1=>sreg_1,
                                         reg_read_2=>sreg_2,
-                                        reg_write_3=>sreg_3,
+                                        reg_write_3=>reg_write_3,
                                         select_reg_1=>sselect_reg_1,
                                         select_reg_2=>sselect_reg_2,
                                         select_reg_3=>sselect_reg_3,
@@ -94,4 +92,17 @@ begin
                                         write_enable=>swr_enable
                                     );
     
+    bancoRegToUla_1 <= sreg_1;
+    bancoRegToUla_2 <= sreg_2;
+
+    ula1: ULA port map  (   in_termo_1=>bancoRegToUla_1,
+                            in_termo_2=> bancoRegToUla_2,
+                            select_op_1=>sselect_op_1,
+                            select_op_2=>sselect_op_2,
+                            out_op_1=>sULA_out_1,
+                            out_op_2=>sULA_out_2
+                        );
+
+    --sreg_3 <= sULA_out_1;
+
 end architecture a_gerenciador;
