@@ -15,6 +15,7 @@ entity bancoDeReg is
             select_reg_3 : in unsigned(2 downto 0);
 
             rst_reg : in std_logic);
+            clk_reg : in std_logic);
 end entity;
 
 architecture a_bancoDeReg of bancoDeReg is
@@ -60,6 +61,31 @@ begin
                     '0';            
     wr_enable_7 <= '1' when select_reg_3="111"else
                     '0';
+
+    data_in_1 <=    reg_in_1 when select_reg_1="001" else
+                    reg_in_2 when select_reg_2="001" else
+                    "0000000000000000";
+    data_in_2 <=    reg_in_1 when select_reg_1="010" else
+                    reg_in_2 when select_reg_2="010" else
+                    "0000000000000000";
+    data_in_3 <=    reg_in_1 when select_reg_1="011" else
+                    reg_in_2 when select_reg_2="011" else
+                    "0000000000000000";
+    data_in_4 <=    reg_in_1 when select_reg_1="100" else
+                    reg_in_2 when select_reg_2="100" else
+                    "0000000000000000";
+    data_in_5 <=    reg_in_1 when select_reg_1="101" else
+                    reg_in_2 when select_reg_2="101" else
+                    "0000000000000000";
+    data_in_6 <=    reg_in_1 when select_reg_1="110" else
+                    reg_in_2 when select_reg_2="110" else
+                    "0000000000000000";
+    data_in_7 <=    reg_in_1 when select_reg_1="111" else
+                    reg_in_2 when select_reg_2="111" else
+                    "0000000000000000";
+
+    reset <= rst_reg;
+    clk <= clk_reg;
     ----------------------INSTANCIAS------------------------
     reg1: reg16bits port map (  clk=>clk,
                                 rst=>reset,
