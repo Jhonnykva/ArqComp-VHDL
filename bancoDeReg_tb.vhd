@@ -5,8 +5,8 @@
     use ieee.std_logic_1164.all;
     use ieee.numeric_std.all;
     
-    entity bancoDeReg_tb is
-    end entity;
+entity bancoDeReg_tb is
+end entity;
     
   architecture a_bancoDeReg_tb of bancoDeReg_tb is
         -------------------------COMPONENTES------------------------
@@ -64,7 +64,7 @@
   
     sim_time_proc: process
     begin
-        wait for 600 ns;
+        wait for 900 ns;
         finished <= '1';
         wait;
     end process sim_time_proc;
@@ -86,23 +86,20 @@
         wait for 200 ns;
         reg_in_1 <= "0000000000000111";
         reg_in_2 <= "0000000000001111";
-        reg_in_3 <= "0000000000011111";
-        select_reg_1 <= "100";
-        select_reg_2 <= "001";
-        select_reg_3 <= "110";
-        write_enable <= '1';
-        wait for 100 ns;
-        reg_in_1 <= "0000000000000111";
-        reg_in_2 <= "0000000000001111";
-        reg_in_3 <= "0000000000011111";
         select_reg_1 <= "100";
         select_reg_2 <= "001";
         select_reg_3 <= "110";
         write_enable <= '0';
-        wait for 100 ns;
+        wait for 200 ns;
+        reg_in_1 <= "0000000000000001";
+        reg_in_2 <= "0000000000000010";
+        select_reg_1 <= "010";
+        select_reg_2 <= "011";
+        select_reg_3 <= "100";
+        write_enable <= '1';
+        wait for 200 ns;
         reg_in_1 <= "0000000000000010";
         reg_in_2 <= "0000000000000011";
-        reg_in_3 <= "0000000000011111";
         select_reg_1 <= "001";
         select_reg_2 <= "010";
         select_reg_3 <= "011";

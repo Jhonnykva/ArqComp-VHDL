@@ -25,7 +25,7 @@ begin
             registro <= "0000000000000000";
         elsif wr_enable='1' then
             if rising_edge(clk) then
-                registro <=data_in;
+                registro <= data_in;
             end if;
         end if;
     end process;

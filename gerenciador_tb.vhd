@@ -28,7 +28,8 @@ architecture a_gerenciador_tb of gerenciador_tb is
                 select_reg_3 : in unsigned(2 downto 0);
     
                 rst_reg : in std_logic;
-                clk_reg : in std_logic);
+                clk_reg : in std_logic;
+                write_enable : in std_logic);
       end component;
 
       component ULA
