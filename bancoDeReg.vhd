@@ -142,7 +142,25 @@ begin
                                 data_out=>data_out_0
                             );
     
-    
+    reg_read_1 <=   data_out_1 when select_reg_1="001" else
+                    data_out_2 when select_reg_1="010" else
+                    data_out_3 when select_reg_1="011" else
+                    data_out_4 when select_reg_1="100" else
+                    data_out_5 when select_reg_1="101" else
+                    data_out_6 when select_reg_1="110" else
+                    data_out_7 when select_reg_1="111" else
+                    data_out_0;
+
+    reg_read_2 <=   data_out_1 when select_reg_2="001" else
+                    data_out_2 when select_reg_2="010" else
+                    data_out_3 when select_reg_2="011" else
+                    data_out_4 when select_reg_2="100" else
+                    data_out_5 when select_reg_2="101" else
+                    data_out_6 when select_reg_2="110" else
+                    data_out_7 when select_reg_2="111" else
+                    data_out_0;
+
+                    
 
 end architecture a_bancoDeReg;
 
