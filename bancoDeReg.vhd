@@ -6,16 +6,17 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity bancoDeReg is
-    port(   reg_in_1 : in unsigned(15 downto 0);
-            reg_in_2 : in unsigned(15 downto 0);
-            reg_out : out unsigned(15 downto 0);
+    port(   reg_in_1 : in unsigned(15 downto 0);--leitura
+            reg_in_2 : in unsigned(15 downto 0);--leitura
+            reg_in_3 : in unsigned(15 downto 0);--escrita
             
-            select_reg_1 : in unsigned(2 downto 0);
-            select_reg_2 : in unsigned(2 downto 0);
-            select_reg_3 : in unsigned(2 downto 0);
+            select_reg_1 : in unsigned(2 downto 0);--registrador que será lido
+            select_reg_2 : in unsigned(2 downto 0);--registrador que será lido
+            select_reg_3 : in unsigned(2 downto 0);--registrador que será escrito
 
-            rst_reg : in std_logic);
-            clk_reg : in std_logic);
+            rst_reg : in std_logic;
+            clk_reg : in std_logic;
+            write_enable : in std_logic);
 end entity;
 
 architecture a_bancoDeReg of bancoDeReg is
@@ -46,20 +47,20 @@ architecture a_bancoDeReg of bancoDeReg is
 
 
 begin
-    -- wr_enable já está funcionando, falta agora os outros sinais
-    wr_enable_1 <= '1' when select_reg_3="001"else
+    
+    wr_enable_1 <= '1' when select_reg_3="001" and write_enable='1' else
                     '0';
-    wr_enable_2 <= '1' when select_reg_3="010"else
+    wr_enable_2 <= '1' when select_reg_3="010" and write_enable='1' else
                     '0';
-    wr_enable_3 <= '1' when select_reg_3="011"else
+    wr_enable_3 <= '1' when select_reg_3="011" and write_enable='1' else
                     '0';
-    wr_enable_4 <= '1' when select_reg_3="100"else
+    wr_enable_4 <= '1' when select_reg_3="100" and write_enable='1'else
                     '0';
-    wr_enable_5 <= '1' when select_reg_3="101"else
+    wr_enable_5 <= '1' when select_reg_3="101" and write_enable='1' else
                     '0';
-    wr_enable_6 <= '1' when select_reg_3="110"else
+    wr_enable_6 <= '1' when select_reg_3="110" and write_enable='1' else
                     '0';            
-    wr_enable_7 <= '1' when select_reg_3="111"else
+    wr_enable_7 <= '1' when select_reg_3="111" and write_enable='1' else
                     '0';
 
     data_in_1 <=    reg_in_1 when select_reg_1="001" else

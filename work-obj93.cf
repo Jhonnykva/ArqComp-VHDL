@@ -5,15 +5,18 @@ file . "ULA_tb.vhd" "ff4ecb5b253300587e404539dda41f11d77976d3" "20211104135048.6
 file . "gerenciador_tb.vhd" "443e0a3fcebf209c9a929be58c13365120b52a29" "20211104135036.609":
   entity gerenciador_tb at 4( 97) + 2 on 17;
   architecture a_gerenciador_tb of gerenciador_tb at 11( 226) + 0 on 18;
-file . "bancoDeReg.vhd" "7de73d7858d25473ff80bcbff773c64bb909d68e" "20211104134646.705":
-  entity bancodereg at 4( 97) + 0 on 13;
-  architecture a_bancodereg of bancodereg at 20( 571) + 0 on 14;
-file . "reg16bits.vhd" "66388406024306f2831df18521074d717779e574" "20211104134641.847":
-  entity reg16bits at 4( 97) + 0 on 11;
-  architecture a_reg16bits of reg16bits at 17( 437) + 0 on 12;
+file . "bancoDeReg.vhd" "a8aaa43ee32b245ed517d85c7c470409db73b74e" "20211104150756.362":
+  entity bancodereg at 4( 97) + 0 on 25;
+  architecture a_bancodereg of bancodereg at 22( 764) + 0 on 26;
+file . "reg16bits.vhd" "66388406024306f2831df18521074d717779e574" "20211104150750.981":
+  entity reg16bits at 4( 97) + 0 on 23;
+  architecture a_reg16bits of reg16bits at 17( 437) + 0 on 24;
 file . "gerenciador.vhd" "52634ff1699d008828665931f3607f99f5140de7" "20211104134744.083":
   entity processador at 4( 97) + 0 on 15;
   architecture a_processador of processador at 11( 208) + 0 on 16;
 file . "ULA.vhd" "d195be7f710b4d311789f11770546b1972e5e773" "20211104135044.130":
   entity ula at 5( 113) + 0 on 19;
   architecture a_ula of ula at 27( 611) + 0 on 20;
+file . "bancoDeReg_tb.vhd" "e84b1eda74ceb098013e76510e62f096feccd53a" "20211104151546.685":
+  entity bancodereg_tb at 4( 97) + 4 on 29;
+  architecture a_bancodereg_tb of bancodereg_tb at 11( 239) + 2 on 30;

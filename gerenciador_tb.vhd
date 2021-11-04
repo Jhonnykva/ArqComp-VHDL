@@ -21,7 +21,7 @@ architecture a_gerenciador_tb of gerenciador_tb is
       component bancoDeReg is
         port(   reg_in_1 : in unsigned(15 downto 0);
                 reg_in_2 : in unsigned(15 downto 0);
-                reg_out : out unsigned(15 downto 0);
+                reg_in_3 : in unsigned(15 downto 0);
                 
                 select_reg_1 : in unsigned(2 downto 0);
                 select_reg_2 : in unsigned(2 downto 0);
@@ -42,14 +42,14 @@ architecture a_gerenciador_tb of gerenciador_tb is
                 out_op_2 : out std_logic);
       end component;
 
-    signal reg_in_1, reg_in_2, reg_out: unsigned(15 downto 0);
+    signal reg_in_1, reg_in_2, reg_in_3: unsigned(15 downto 0);
     signal select_reg_1, select_reg_2, select_reg_3: unsigned(2 downto 0);
     signal rst_reg, clk_reg: std_logic;
     
     begin  
       uut: bancoDeReg port map(   reg_in_1=>reg_in_1,
                                   reg_in_2=>reg_in_2,
-                                  reg_out=>reg_out,
+                                  reg_in_3=>reg_in_3,
                                   select_reg_1=>select_reg_1,
                                   select_reg_2=>select_reg_2,
                                   select_reg_3=>select_reg_3,
