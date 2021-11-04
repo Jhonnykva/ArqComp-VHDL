@@ -8,9 +8,10 @@ entity gerenciador is
         clk,rst,wr_en: in STD_LOGIC;
         
         slt_ula: in unsigned(1 downto 0);
-        slt_reg_read_1, slt_reg_read_2, slt_reg_write, slt_mux: in unsigned(2 downto 0);
+        slt_reg_read_1, slt_reg_read_2, slt_reg_write: in unsigned(2 downto 0);
+        ALUsrc: in std_logic;
         
-        debug_top_level: out signed(15 downto 0)
+        debug_top_level: out signed(15 downto 0);
     );
 end entity gerenciador;
 
@@ -32,7 +33,7 @@ architecture a_gerenciador of gerenciador is
             slt_read1   : IN unsigned (2 downto 0);
             slt_read2   : IN unsigned (2 downto 0);
             dados_write : IN signed (15 downto 0);
-            slt_write   : IN signed (2 downto 0);
+            slt_write   : IN unsigned (2 downto 0);
             wr_en       : IN STD_LOGIC ;
             clk         : IN STD_LOGIC ;
             rst         : IN STD_LOGIC ;
@@ -41,14 +42,12 @@ architecture a_gerenciador of gerenciador is
         );
     end component;
     
-    component mux2x4 is
+    component mux1x2 is
         port
         (
-            slt  :  unsigned (1 downto 0);
+            slt  : IN std_logic;
             in0  : IN signed (15 downto 0);
             in1  : IN signed (15 downto 0);
-            in2  : IN signed (15 downto 0);
-            in3  : IN signed (15 downto 0);
             out0 : OUT signed (15 downto 0)
         );
     end component;
@@ -77,12 +76,11 @@ begin
         dados_read2=>out_banco_2
     );
     
-    mux: mux2x4 port map(
-        slt=>slt_mux, 
+    mux: mux1x2 port map(
+        slt=>ALUsrc, 
         in0=>out_banco_2, 
         in1=>top_level, 
-        in2=>"0000000000000000", 
-        in3=>"0000000000000000", 
+    
         out0=>out_mux
     );
     

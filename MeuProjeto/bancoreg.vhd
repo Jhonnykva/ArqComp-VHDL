@@ -7,7 +7,7 @@ entity bancoreg is
         slt_read1: in unsigned(2 downto 0);
         slt_read2: in unsigned(2 downto 0);
         dados_write: in signed(15 downto 0);
-        slt_write: in signed(2 downto 0);
+        slt_write: in unsigned(2 downto 0);
         wr_en: in STD_LOGIC;
         clk: in STD_LOGIC;
         rst: in STD_LOGIC;
