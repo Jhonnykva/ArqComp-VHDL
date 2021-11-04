@@ -6,14 +6,14 @@ entity bancoreg is
     port(
         slt_read1: in unsigned(2 downto 0);
         slt_read2: in unsigned(2 downto 0);
-        dados_write: in unsigned(15 downto 0);
-        slt_write: in unsigned(2 downto 0);
+        dados_write: in signed(15 downto 0);
+        slt_write: in signed(2 downto 0);
         wr_en: in STD_LOGIC;
         clk: in STD_LOGIC;
         rst: in STD_LOGIC;
         
-        dados_read1: out unsigned(15 downto 0);
-        dados_read2: out unsigned(15 downto 0)
+        dados_read1: out signed(15 downto 0);
+        dados_read2: out signed(15 downto 0)
     );
 end entity bancoreg;
 
@@ -24,13 +24,13 @@ architecture a_bancoreg of bancoreg is
             clk      : IN std_logic ;
             rst      : IN std_logic ;
             wr_en    : IN std_logic ;
-            data_in  : IN unsigned (15 downto 0);
-            data_out : OUT unsigned (15 downto 0)
+            data_in  : IN signed (15 downto 0);
+            data_out : OUT signed (15 downto 0)
         );
     end component;
     
     signal wr_en1,wr_en2,wr_en3,wr_en4,wr_en5,wr_en6,wr_en7: STD_LOGIC :='0';
-    signal data_out0,data_out1,data_out2,data_out3,data_out4,data_out5,data_out6,data_out7: unsigned(15 downto 0);
+    signal data_out0,data_out1,data_out2,data_out3,data_out4,data_out5,data_out6,data_out7: signed(15 downto 0);
     constant wr_en0:STD_LOGIC:='0';
     
 begin

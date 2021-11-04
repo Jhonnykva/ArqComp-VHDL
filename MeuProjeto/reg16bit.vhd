@@ -7,13 +7,13 @@ entity reg16bit is
         clk :in std_logic;
         rst :in std_logic;
         wr_en: in std_logic;
-        data_in: in unsigned(15 downto 0);
-        data_out: out unsigned(15 downto 0)
+        data_in: in signed(15 downto 0);
+        data_out: out signed(15 downto 0)
     );
 end entity reg16bit;
 
 architecture a_reg16bit of reg16bit is
-    signal registro: unsigned(15 downto 0);
+    signal registro: signed(15 downto 0);
 begin
 
    process (clk,rst,wr_en)

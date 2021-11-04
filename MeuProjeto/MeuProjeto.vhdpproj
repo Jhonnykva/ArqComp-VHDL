@@ -11,6 +11,15 @@
     <Header>bancoreg.vhd</Header>
   </Items>
   <Items xsi:type="ProjectFileVHDL">
+    <Header>gerenciador.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>gerenciador_tb.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>mux2x4.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
     <Header>reg16bit.vhd</Header>
   </Items>
   <CruviHSExtensions>
