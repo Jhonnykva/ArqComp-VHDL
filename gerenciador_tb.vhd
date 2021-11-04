@@ -14,23 +14,23 @@ architecture a_gerenciador_tb of gerenciador_tb is
           port(   clk      : in std_logic;
                   rst       : in std_logic;
                   wr_enable : in std_logic;
-                  data_in   : in unsigned(15 downto 0);
-                  data_out  : out unsigned(15 downto 0));
+                  data_in   : in signed(15 downto 0);
+                  data_out  : out signed(15 downto 0));
       end component;
 
       component bancoDeReg is
-        port(   reg_in_1 : in unsigned(15 downto 0);
-                reg_in_2 : in unsigned(15 downto 0);
-                reg_in_3 : in unsigned(15 downto 0);
+        port(   reg_read_1 : out signed(15 downto 0);--leitura
+                reg_read_2 : out signed(15 downto 0);--leitura
+                reg_write_3 : in signed(15 downto 0);--escrita
                 
-                select_reg_1 : in unsigned(2 downto 0);
-                select_reg_2 : in unsigned(2 downto 0);
-                select_reg_3 : in unsigned(2 downto 0);
-    
+                select_reg_1 : in unsigned(2 downto 0);--registrador que será lido
+                select_reg_2 : in unsigned(2 downto 0);--registrador que será lido
+                select_reg_3 : in unsigned(2 downto 0);--registrador que será escrito
+
                 rst_reg : in std_logic;
                 clk_reg : in std_logic;
                 write_enable : in std_logic);
-      end component;
+    end component;
 
       component ULA
         port(   in_termo_1 : in signed (15 downto 0);
@@ -48,15 +48,7 @@ architecture a_gerenciador_tb of gerenciador_tb is
     signal rst_reg, clk_reg: std_logic;
     
     begin  
-      uut: bancoDeReg port map(   reg_in_1=>reg_in_1,
-                                  reg_in_2=>reg_in_2,
-                                  reg_in_3=>reg_in_3,
-                                  select_reg_1=>select_reg_1,
-                                  select_reg_2=>select_reg_2,
-                                  select_reg_3=>select_reg_3,
-                                  rst_reg=>rst_reg,
-                                  clk_reg=>clk_reg
-                              );
+      --uut: gerenciador port map();
 
 
 ----------TESTES----------

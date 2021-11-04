@@ -6,13 +6,13 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
     
 entity gerenciador is
-    port(   reg_1 : in signed (15 downto 0);
-            reg_2 : in signed (15 downto 0);
-            reg_3 : in signed (15 downto 0);
+    port(   reg_1 : out signed (15 downto 0);--leitura
+            reg_2 : out signed (15 downto 0);--leitura
+            reg_3 : in signed (15 downto 0);--escrita
 
-            select_reg_1 : in unsigned (2 downto 0);
-            select_reg_2 : in unsigned (2 downto 0);
-            select_reg_3 : in unsigned (2 downto 0);
+            select_reg_1 : in unsigned (2 downto 0);--registrador que será lido
+            select_reg_2 : in unsigned (2 downto 0);--registrador que será lido
+            select_reg_3 : in unsigned (2 downto 0);--registrador que será escrito
 
             wr_enable : in std_logic;
             rst_reg : in std_logic;
@@ -29,14 +29,14 @@ end entity;
 architecture a_gerenciador of gerenciador is
 -------------------------COMPONENTES------------------------
     component bancoDeReg is
-        port(   reg_in_1 : in unsigned(15 downto 0);
-                reg_in_2 : in unsigned(15 downto 0);
-                reg_in_3 : in unsigned(15 downto 0);
+        port(   reg_read_1 : out signed(15 downto 0);--leitura
+                reg_read_2 : out signed(15 downto 0);--leitura
+                reg_write_3 : in signed(15 downto 0);--escrita
                 
-                select_reg_1 : in unsigned(2 downto 0);
-                select_reg_2 : in unsigned(2 downto 0);
-                select_reg_3 : in unsigned(2 downto 0);
-    
+                select_reg_1 : in unsigned(2 downto 0);--registrador que será lido
+                select_reg_2 : in unsigned(2 downto 0);--registrador que será lido
+                select_reg_3 : in unsigned(2 downto 0);--registrador que será escrito
+
                 rst_reg : in std_logic;
                 clk_reg : in std_logic;
                 write_enable : in std_logic);
@@ -53,14 +53,12 @@ architecture a_gerenciador of gerenciador is
                 out_op_2 : out std_logic);
     end component;
 
-    signal sreg_1, sreg_2, sreg_3, sULA_out_1: unsigned (15 downto 0);
+    signal sreg_1, sreg_2, sreg_3, sULA_out_1: signed (15 downto 0);
     signal sselect_reg_1, sselect_reg_2, sselect_reg_3: unsigned(2 downto 0);
     signal swr_enable, srst_reg, sclk_reg, sselect_op_1, sselect_op_2, sULA_out_2 : std_logic;
 
 begin
     --valores dos registradores
-    sreg_1 <= reg_1;
-    sreg_2 <= reg_2;
     sreg_3 <= reg_3;
 
     --id do registrador
@@ -85,9 +83,9 @@ begin
                             out_op_2=>sULA_out_2
                         );
 
-    bancoReg1: bancoDeReg port map  (   reg_in_1=>sreg_1,
-                                        reg_in_2=>sreg_2,
-                                        reg_in_3=>sreg_3,
+    bancoReg1: bancoDeReg port map  (   reg_read_1=>sreg_1,
+                                        reg_read_2=>sreg_2,
+                                        reg_write_3=>sreg_3,
                                         select_reg_1=>sselect_reg_1,
                                         select_reg_2=>sselect_reg_2,
                                         select_reg_3=>sselect_reg_3,

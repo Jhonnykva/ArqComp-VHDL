@@ -6,9 +6,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity bancoDeReg is
-    port(   reg_read_1 : out unsigned(15 downto 0);--leitura
-            reg_read_2 : out unsigned(15 downto 0);--leitura
-            reg_write_3 : in unsigned(15 downto 0);--escrita
+    port(   reg_read_1 : out signed(15 downto 0);--leitura
+            reg_read_2 : out signed(15 downto 0);--leitura
+            reg_write_3 : in signed(15 downto 0);--escrita
             
             select_reg_1 : in unsigned(2 downto 0);--registrador que será lido
             select_reg_2 : in unsigned(2 downto 0);--registrador que será lido
@@ -25,8 +25,8 @@ architecture a_bancoDeReg of bancoDeReg is
         port(   clk      : in std_logic;
                 rst       : in std_logic;
                 wr_enable : in std_logic;
-                data_in   : in unsigned(15 downto 0);
-                data_out  : out unsigned(15 downto 0));
+                data_in   : in signed(15 downto 0);
+                data_out  : out signed(15 downto 0));
     end component;
     
     ------------------------ SINAIS----------------------
@@ -34,15 +34,11 @@ architecture a_bancoDeReg of bancoDeReg is
     
     signal  wr_enable_1,wr_enable_2,wr_enable_3,wr_enable_4,
             wr_enable_5,wr_enable_6,wr_enable_7,wr_enable_0: std_logic :='0';
-        
-    --signal  data_in_1,data_in_2,data_in_3,data_in_4,
-    --        data_in_5,data_in_6,data_in_7: unsigned (15 downto 0);
 
     signal  data_out_1,data_out_2,data_out_3,data_out_4,
-            data_out_5,data_out_6,data_out_7,data_out_0: unsigned (15 downto 0);
+            data_out_5,data_out_6,data_out_7,data_out_0: signed (15 downto 0);
 
-    constant data_0 : unsigned (15 downto 0) :="0000000000000000";--registrador 0 é constante
-
+    constant data_0 : signed (15 downto 0) :="0000000000000000";--registrador 0 é constante
 
 begin
     
@@ -61,27 +57,6 @@ begin
     wr_enable_7 <= '1' when select_reg_3="111" and write_enable='1' else
                     '0';
 
---    data_in_1 <=    reg_in_1 when select_reg_1="001" else
---                    reg_in_2 when select_reg_2="001" else
---                   "0000000000000000";
---   data_in_2 <=    reg_in_1 when select_reg_1="010" else
---                    reg_in_2 when select_reg_2="010" else
---                    "0000000000000000";
---    data_in_3 <=    reg_in_1 when select_reg_1="011" else
---                    reg_in_2 when select_reg_2="011" else
---                    "0000000000000000";
---    data_in_4 <=    reg_in_1 when select_reg_1="100" else
---                    reg_in_2 when select_reg_2="100" else
---                    "0000000000000000";
---    data_in_5 <=    reg_in_1 when select_reg_1="101" else
---                    reg_in_2 when select_reg_2="101" else
---                    "0000000000000000";
---    data_in_6 <=    reg_in_1 when select_reg_1="110" else
---                    reg_in_2 when select_reg_2="110" else
---                    "0000000000000000";
---    data_in_7 <=    reg_in_1 when select_reg_1="111" else
---                    reg_in_2 when select_reg_2="111" else
---                    "0000000000000000";
 
     reset <= rst_reg;
     clk <= clk_reg;
