@@ -103,6 +103,7 @@ begin
                             out_op_2=>sULA_out_2
                         );
 
-    --sreg_3 <= sULA_out_1;
+    ULA_out_1 <= sULA_out_1;
+    ULA_out_2 <= sULA_out_2;
 
 end architecture a_gerenciador;
