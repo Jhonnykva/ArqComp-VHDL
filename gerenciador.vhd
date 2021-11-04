@@ -31,11 +31,11 @@ architecture a_gerenciador of gerenciador is
     component bancoDeReg is
         port(   reg_read_1 : out signed(15 downto 0);--leitura
                 reg_read_2 : out signed(15 downto 0);--leitura
-                reg_write_3 : in signed(15 downto 0);--escrita
+                reg_write : in signed(15 downto 0);--escrita
                 
-                select_reg_1 : in unsigned(2 downto 0);--registrador que será lido
-                select_reg_2 : in unsigned(2 downto 0);--registrador que será lido
-                select_reg_3 : in unsigned(2 downto 0);--registrador que será escrito
+                select_read_1 : in unsigned(2 downto 0);--registrador que será lido
+                select_read_2 : in unsigned(2 downto 0);--registrador que será lido
+                select_write : in unsigned(2 downto 0);--registrador que será escrito
 
                 rst_reg : in std_logic;
                 clk_reg : in std_logic;
@@ -59,7 +59,7 @@ architecture a_gerenciador of gerenciador is
     signal swr_enable, srst_reg, sclk_reg : std_logic;
     signal bancoRegToUla_1, bancoRegToUla_2, sULA_out_1 : signed (15 downto 0);
     signal sselect_op_1, sselect_op_2, sULA_out_2 : std_logic;
-    signal reg_write_3, sreg_1, sreg_2 : signed (15 downto 0);
+    signal reg_write_3 : signed (15 downto 0);
 
 begin
     --valores dos registradores
@@ -81,8 +81,8 @@ begin
 
     
 
-    bancoReg1: bancoDeReg port map  (   reg_read_1=>sreg_1,
-                                        reg_read_2=>sreg_2,
+    bancoReg1: bancoDeReg port map  (   reg_read_1=>bancoRegToUla_1,
+                                        reg_read_2=>bancoRegToUla_2,
                                         reg_write_3=>reg_write_3,
                                         select_reg_1=>sselect_reg_1,
                                         select_reg_2=>sselect_reg_2,
@@ -92,8 +92,6 @@ begin
                                         write_enable=>swr_enable
                                     );
     
-    bancoRegToUla_1 <= sreg_1;
-    bancoRegToUla_2 <= sreg_2;
 
     ula1: ULA port map  (   in_termo_1=>bancoRegToUla_1,
                             in_termo_2=> bancoRegToUla_2,

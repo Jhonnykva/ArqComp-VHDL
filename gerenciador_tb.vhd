@@ -54,6 +54,7 @@ architecture a_gerenciador_tb of gerenciador_tb is
 
 
 ----------TESTES----------
+
 end architecture a_gerenciador_tb;
 
 
