@@ -44,13 +44,13 @@ begin
     reg6: reg16bit port map(clk=>clk, rst=>rst, wr_en=>wr_en6, data_in=>dados_write, data_out=>data_out6);
     reg7: reg16bit port map(clk=>clk, rst=>rst, wr_en=>wr_en7, data_in=>dados_write, data_out=>data_out7);
     
-    wr_en1<='1' when slt_write = "001" else '0';
-    wr_en2<='1' when slt_write = "010" else '0';
-    wr_en3<='1' when slt_write = "011" else '0';
-    wr_en4<='1' when slt_write = "100" else '0';
-    wr_en5<='1' when slt_write = "101" else '0';
-    wr_en6<='1' when slt_write = "110" else '0';
-    wr_en7<='1' when slt_write = "111" else '0';
+    wr_en1<='1' when slt_write = "001" and wr_en='1' else '0';
+    wr_en2<='1' when slt_write = "010" and wr_en='1' else '0';
+    wr_en3<='1' when slt_write = "011" and wr_en='1' else '0';
+    wr_en4<='1' when slt_write = "100" and wr_en='1' else '0';
+    wr_en5<='1' when slt_write = "101" and wr_en='1' else '0';
+    wr_en6<='1' when slt_write = "110" and wr_en='1' else '0';
+    wr_en7<='1' when slt_write = "111" and wr_en='1' else '0';
     
     dados_read1 <= data_out0 when slt_read1 ="000" else
                     data_out1 when slt_read1 ="001" else

@@ -1,7 +1,13 @@
 v 4
+file . "gerenciador_tb.vhd" "e0312fe2b15403f751b75d389cbd1b46f19b13d8" "20211104235706.605":
+  entity gerenciador_tb at 1( 0) + 0 on 17;
+  architecture a_gerenciador_tb of gerenciador_tb at 8( 130) + 0 on 18;
 file . "gerenciador.vhd" "d48a9a209b77259607674dcc15f3497b5b685c61" "20211104234110.196":
   entity gerenciador at 1( 0) + 0 on 13;
   architecture a_gerenciador of gerenciador at 18( 450) + 0 on 14;
 file . "mux1x2.vhd" "b283a73f476b0027602bf91b5f169d75316b14af" "20211104233650.154":
   entity mux1x2 at 1( 0) + 0 on 11;
   architecture a_mux1x2 of mux1x2 at 14( 251) + 0 on 12;
+file . "bancoreg.vhd" "d484824452a4e576c2f97f242f2e00aa01b95148" "20211104235405.455":
+  entity bancoreg at 1( 0) + 0 on 15;
+  architecture a_bancoreg of bancoreg at 20( 507) + 0 on 16;

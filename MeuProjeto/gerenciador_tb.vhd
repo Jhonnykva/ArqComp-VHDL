@@ -17,7 +17,7 @@ architecture a_gerenciador_tb of gerenciador_tb is
             slt_reg_read_1  : IN unsigned (2 downto 0);
             slt_reg_read_2  : IN unsigned (2 downto 0);
             slt_reg_write   : IN unsigned (2 downto 0);
-            ALUscr          : IN std_logic; 
+            ALUsrc          : IN std_logic; 
             debug_top_level : OUT signed (15 downto 0)
         );
     end component;
@@ -27,11 +27,11 @@ architecture a_gerenciador_tb of gerenciador_tb is
     signal finished : std_logic := '0';
     signal clk, reset : std_logic;
 
-    signal top_level :signed (15 downto 0);
-    signal wr_en : std_logic;
-    signal slt_ula : unsigned (1 downto 0);
-    signal slt_reg_read_1, slt_reg_read_2, slt_reg_write :  unsigned (2 downto 0);
-    
+    signal top_level, debug_top_level :signed (15 downto 0):="0000000000000000";
+    signal wr_en, ALUsrc: std_logic:='0';
+    signal slt_ula : unsigned (1 downto 0):="00";
+    signal slt_reg_read_1, slt_reg_read_2, slt_reg_write :  unsigned (2 downto 0):="000";
+
 
 
 begin
@@ -43,8 +43,8 @@ begin
                                 slt_ula=>slt_ula,
                                 slt_reg_read_1=>slt_reg_read_1,
                                 slt_reg_read_2=>slt_reg_read_2,
-                                slt_reg_write=>slt_reg_write
-                                ALUscr=>ALUscr
+                                slt_reg_write=>slt_reg_write,
+                                ALUsrc=>ALUsrc,
                                 debug_top_level=>debug_top_level);
 
 --TESTES
@@ -59,7 +59,7 @@ begin
   
     sim_time_proc: process
     begin
-        wait for 900 ns;
+        wait for 500 ns;
         finished <= '1';
         wait;
     end process sim_time_proc;
@@ -73,6 +73,22 @@ begin
         wait for period_time/2;
         end loop;
         wait;
-    end process clk_proc;    
+    end process clk_proc;  
+    
+    process 
+    begin
+        wait for 200 ns;
+        top_level <= "0000000000000011";
+        slt_write <= "001";
+        wr_en <= '1';
+        ALUsrc <= '1';
+        slt_reg_read_1 <= "000";
+        slt_ula <= "00";
+        wait for 100 ns;
+        wr_en <= '0';
+        slt_reg_read_1 <= "001";
 
+
+        wait;
+    end process;
 end architecture a_gerenciador_tb;
