@@ -11,7 +11,7 @@ entity gerenciador is
         slt_reg_read_1, slt_reg_read_2, slt_reg_write: in unsigned(2 downto 0);
         ALUsrc: in std_logic;
         
-        debug_top_level: out signed(15 downto 0);
+        debug_top_level: out signed(15 downto 0)
     );
 end entity gerenciador;
 

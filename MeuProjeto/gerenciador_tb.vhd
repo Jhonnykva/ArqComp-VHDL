@@ -59,7 +59,7 @@ begin
   
     sim_time_proc: process
     begin
-        wait for 500 ns;
+        wait for 1000 ns;
         finished <= '1';
         wait;
     end process sim_time_proc;
@@ -77,18 +77,45 @@ begin
     
     process 
     begin
+        --addi $1,$0,3
         wait for 200 ns;
         top_level <= "0000000000000011";
-        slt_write <= "001";
+        slt_reg_write <= "001";
         wr_en <= '1';
         ALUsrc <= '1';
         slt_reg_read_1 <= "000";
         slt_ula <= "00";
+      
+        --addi $4,$0,4
         wait for 100 ns;
-        wr_en <= '0';
+        top_level <= "0000000000000100";
+        slt_reg_write <= "100";
+       
+        --add $5,$1,$4
+        wait for 100 ns;
+        ALUsrc <= '0';
         slt_reg_read_1 <= "001";
+        slt_reg_read_2 <= "100";
+        slt_reg_write <= "101";
+       
+        --addi $6,$0,2
+        wait for 100 ns;
+        ALUsrc <= '1';
+        top_level <= "0000000000000010";
+        slt_reg_write <= "110";
+        slt_reg_read_1 <= "000";
+
+        --sub $1,$5,$6
+        wait for 100 ns;
+        slt_ula <= "01";
+        ALUsrc <= '0';
+        slt_reg_read_1 <= "110";
+        slt_reg_read_2 <= "101";
+        slt_reg_write <= "001";
+        wait for 100 ns;
 
 
+        wr_en <= '0';
         wait;
     end process;
 end architecture a_gerenciador_tb;
