@@ -23,3 +23,7 @@ ghdl -r maquina_de_estados_tb --vcd=maquina_de_estados_tb.vcd
 ghdl -a ROM.vhd
 ghdl -a ROM_tb.vhd
 ghdl -r ROM_tb --vcd=ROM_tb.vcd
+
+ghdl -a PC_control.vhd
+ghdl -a PC_control_tb.vhd
+ghdl -r PC_control_tb --vcd=PC_control_tb.vcd
