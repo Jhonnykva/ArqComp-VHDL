@@ -1,6 +1,21 @@
 <?xml version="1.0"?>
 <ProjectRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Header>MeuProjeto</Header>
+  <Items xsi:type="ProjectFolder">
+    <Header>Generated</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>PC_control.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>PC_control_tb.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>ROM.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>ROM_tb.vhd</Header>
+  </Items>
   <Items xsi:type="ProjectFileVHDL">
     <Header>ULA.vhd</Header>
   </Items>
@@ -17,7 +32,13 @@
     <Header>gerenciador_tb.vhd</Header>
   </Items>
   <Items xsi:type="ProjectFileVHDL">
-    <Header>mux2x4.vhd</Header>
+    <Header>maquina_de_estados.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>maquina_de_estados_tb.vhd</Header>
+  </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>mux2x1.vhd</Header>
   </Items>
   <Items xsi:type="ProjectFileVHDL">
     <Header>reg16bit.vhd</Header>
@@ -32,5 +53,6 @@
     <string xsi:nil="true" />
   </CruviLSExtensions>
   <IOVoltage>0</IOVoltage>
+  <HardwareStartPathRelative>ROM.vhd</HardwareStartPathRelative>
   <UseShield>false</UseShield>
 </ProjectRoot>
