@@ -9,7 +9,7 @@ architecture a_maquina_de_estados_tb of maquina_de_estados_tb is
     component maquina_de_estados
         port(
             clk: in std_logic;
-            rst: in std_logic;
+            reset: in std_logic;
             estado: out std_logic
         );
     end component;
@@ -17,13 +17,13 @@ architecture a_maquina_de_estados_tb of maquina_de_estados_tb is
     constant period_time : time := 50 ns;
     signal finished : std_logic := '0';
     signal clk, reset : std_logic;
-    signal estado, teste : std_logic;
+    signal estado : std_logic;
 
 
     begin
         uut: maquina_de_estados port map(   clk=>clk,
                                             estado=>estado,
-                                            rst=>reset
+                                            reset=>reset
                                         );
 
 
@@ -55,10 +55,7 @@ architecture a_maquina_de_estados_tb of maquina_de_estados_tb is
 
     process 
     begin
-        wait for 100 ns;
-        teste <= '1';
-        wait for 250 ns;
-        teste <= '0';   
+         
         wait;
     end process;
 end architecture a_maquina_de_estados_tb;
