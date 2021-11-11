@@ -14,7 +14,7 @@ architecture a_maquina_de_estados_tb of maquina_de_estados_tb is
         );
     end component;
 
-    constant period_time : time := 50 ns;
+    constant period_time : time := 100 ns;
     signal finished : std_logic := '0';
     signal clk, reset : std_logic;
     signal estado : std_logic;

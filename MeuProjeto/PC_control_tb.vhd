@@ -11,19 +11,19 @@ architecture a_PC_control_tb of PC_control_tb is
             clk :in std_logic;
             rst :in std_logic;
             wr_en: in std_logic;
-            data_in: in signed(15 downto 0);
-            data_out: out signed(15 downto 0);
-            incrementa: in std_logic
+            data_in: in unsigned(6 downto 0);
+            data_out: out unsigned(6 downto 0);
+            top_lvl: out signed(16 downto 0)
         );
     end component;
 
     signal wr_en: std_logic;
-    signal incrementa: std_logic :='0';
-    signal data_in, data_out: signed(15 downto 0);
+    signal data_in, data_out: unsigned(6 downto 0);
 
     constant period_time : time := 50 ns;
     signal finished : std_logic := '0';
     signal clk, reset : std_logic;
+    signal top_lvl: signed(16 downto 0);
 
 begin
     uut: PC_control port map(   clk=>clk,
@@ -31,7 +31,7 @@ begin
                                 wr_en=>wr_en,
                                 data_in=>data_in,
                                 data_out=>data_out,
-                                incrementa=>incrementa
+                                top_lvl=>top_lvl
                             );
 
     reset_global: process
@@ -62,12 +62,10 @@ begin
 
     process 
     begin
+        wait for 100 ns;
         wr_en <='1';
-        incrementa<='1';
-        data_in <="0000000000000000";
+        data_in <="0000000";
         wait for 50 ns;
-        incrementa<='0';
-        incrementa<='1';
         wait for 50 ns;
         wait;
     end process;
