@@ -1,4 +1,7 @@
 v 4
+file . "maquina_de_estados_tb.vhd" "a5e5994ae489fdddf71013ca6f3a0c3ee3f7b93c" "20211111194346.115":
+  entity maquina_de_estados_tb at 1( 0) + 0 on 87;
+  architecture a_maquina_de_estados_tb of maquina_de_estados_tb at 8( 122) + 0 on 88;
 file . "ROM.vhd" "397cdc9a98035de07497620920dfdf26caab5b7b" "20211111184207.640":
   entity rom at 1( 0) + 0 on 59;
   architecture a_rom of rom at 12( 327) + 0 on 60;
@@ -26,3 +29,6 @@ file . "ULA_tb.vhd" "0a74099ffd31b261c1fc33c1e9f641fc497cdacc" "20211105171330.3
 file . "ROM_tb.vhd" "c77d0ace580b264434fd86bc7809a3f3d117603b" "20211111184647.609":
   entity rom_tb at 1( 0) + 0 on 71;
   architecture a_rom_tb of rom_tb at 8( 101) + 0 on 72;
+file . "maquina_de_estados.vhd" "ed4a29e8278e0293073338e73c81cee87a0caed3" "20211111193256.997":
+  entity maquina_de_estados at 1( 0) + 0 on 77;
+  architecture a_maquina_de_estados of maquina_de_estados at 13( 244) + 0 on 78;

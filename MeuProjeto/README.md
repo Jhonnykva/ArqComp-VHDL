@@ -13,3 +13,13 @@ ghdl -a ULA_tb.vhd
 
 ghdl -r gerenciador_tb --vcd=gerenciador_tb.vcd
 ghdl -r ULA_tb --vcd=ULA_tb.vcd
+
+
+
+ghdl -a maquina_de_estados.vhd
+ghdl -a maquina_de_estados_tb.vhd
+ghdl -r maquina_de_estados_tb --vcd=maquina_de_estados_tb.vcd
+
+ghdl -a ROM.vhd
+ghdl -a ROM_tb.vhd
+ghdl -r ROM_tb --vcd=ROM_tb.vcd
