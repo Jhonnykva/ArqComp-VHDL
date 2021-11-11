@@ -25,7 +25,7 @@ architecture a_PC_control of PC_control is
         );
     end component;
 
-    signal resultado: signed(15 downto 0);
+    signal resultado: signed(15 downto 0):="0000000000000000";
 begin
     PC: reg16bit port map( clk=>clk,
                             rst=>rst,
@@ -35,7 +35,7 @@ begin
                         );
 
     
-    resultado <=   data_in+1 when incrementa = '1' else
-                   data_in;
+    resultado <=    resultado+1 when incrementa = '1' and rising_edge(clk) else
+                    resultado;
     
 end architecture a_PC_control;

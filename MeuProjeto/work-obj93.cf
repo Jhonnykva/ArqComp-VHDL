@@ -35,9 +35,9 @@ file . "ROM.vhd" "be7280b0f3d389cfc4d0f25471a859c9110d89bf" "20211111214554.850"
 file . "maquina_de_estados_tb.vhd" "70148e468cd4fce3ec1a7f64f6abf8350293056d" "20211111200218.980":
   entity maquina_de_estados_tb at 1( 0) + 0 on 103;
   architecture a_maquina_de_estados_tb of maquina_de_estados_tb at 8( 122) + 0 on 104;
-file . "PC_control.vhd" "ae040a51337b82d49a872a9b8ffc3ab1bcd27ffb" "20211111214445.781":
-  entity pc_control at 1( 0) + 0 on 175;
-  architecture a_pc_control of pc_control at 17( 354) + 0 on 176;
-file . "PC_control_tb.vhd" "60eb300d3d07f0b778ee8c86ae7038267df316d9" "20211111214451.971":
-  entity pc_control_tb at 1( 0) + 0 on 177;
-  architecture a_pc_control_tb of pc_control_tb at 8( 132) + 0 on 178;
+file . "PC_control.vhd" "6767a26edfd5e2a5321837a25878c4e8c2257c93" "20211111221213.283":
+  entity pc_control at 1( 0) + 0 on 191;
+  architecture a_pc_control of pc_control at 17( 354) + 0 on 192;
+file . "PC_control_tb.vhd" "60eb300d3d07f0b778ee8c86ae7038267df316d9" "20211111221215.655":
+  entity pc_control_tb at 1( 0) + 0 on 193;
+  architecture a_pc_control_tb of pc_control_tb at 8( 132) + 0 on 194;
