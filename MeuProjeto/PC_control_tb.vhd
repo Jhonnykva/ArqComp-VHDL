@@ -13,7 +13,8 @@ architecture a_PC_control_tb of PC_control_tb is
             wr_en: in std_logic;
             data_in: in unsigned(6 downto 0);
             data_out: out unsigned(6 downto 0);
-            top_lvl: out signed(16 downto 0)
+            top_lvl: out unsigned(16 downto 0);
+            jump_en: out STD_LOGIC
         );
     end component;
 
@@ -23,7 +24,7 @@ architecture a_PC_control_tb of PC_control_tb is
     constant period_time : time := 50 ns;
     signal finished : std_logic := '0';
     signal clk, reset : std_logic;
-    signal top_lvl: signed(16 downto 0);
+    signal top_lvl: unsigned(16 downto 0);
 
 begin
     uut: PC_control port map(   clk=>clk,

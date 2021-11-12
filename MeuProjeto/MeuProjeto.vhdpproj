@@ -43,6 +43,9 @@
   <Items xsi:type="ProjectFileVHDL">
     <Header>reg16bit.vhd</Header>
   </Items>
+  <Items xsi:type="ProjectFileVHDL">
+    <Header>reg7bit.vhd</Header>
+  </Items>
   <CruviHSExtensions>
     <string xsi:nil="true" />
   </CruviHSExtensions>
@@ -53,6 +56,6 @@
     <string xsi:nil="true" />
   </CruviLSExtensions>
   <IOVoltage>0</IOVoltage>
-  <HardwareStartPathRelative>ROM.vhd</HardwareStartPathRelative>
+  <HardwareStartPathRelative>PC_control.vhd</HardwareStartPathRelative>
   <UseShield>false</UseShield>
 </ProjectRoot>
