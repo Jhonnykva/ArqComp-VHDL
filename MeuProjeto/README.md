@@ -27,3 +27,5 @@ ghdl -r ROM_tb --vcd=ROM_tb.vcd
 ghdl -a PC_control.vhd
 ghdl -a PC_control_tb.vhd
 ghdl -r PC_control_tb --vcd=PC_control_tb.vcd
+
+ghdl -a reg7bit.vhd

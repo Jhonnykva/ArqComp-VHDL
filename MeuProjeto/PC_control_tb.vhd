@@ -13,8 +13,8 @@ architecture a_PC_control_tb of PC_control_tb is
             wr_en: in std_logic;
             data_in: in unsigned(6 downto 0);
             data_out: out unsigned(6 downto 0);
-            top_lvl: out unsigned(16 downto 0);
-            jump_en: out STD_LOGIC
+            top_lvl: out unsigned(16 downto 0)
+            
         );
     end component;
 
@@ -45,7 +45,7 @@ begin
   
     sim_time_proc: process
     begin
-        wait for 400 ns;
+        wait for 600 ns;
         finished <= '1';
         wait;
     end process sim_time_proc;
@@ -67,7 +67,9 @@ begin
         wr_en <='1';
         data_in <="0000000";
         wait for 50 ns;
-        wait for 50 ns;
+        wr_en <='0';
+        wait for 100 ns;
+        wr_en <='1';
         wait;
     end process;
 

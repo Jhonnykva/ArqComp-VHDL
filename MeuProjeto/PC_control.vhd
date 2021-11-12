@@ -9,8 +9,8 @@ entity PC_control is
         wr_en: in std_logic;
         data_in: in unsigned(6 downto 0);
         data_out: out unsigned(6 downto 0);
-        top_lvl: out unsigned(16 downto 0);
-        jump_en: out STD_LOGIC
+        top_lvl: out unsigned(16 downto 0)
+        
     );
 end entity PC_control;
 
@@ -44,7 +44,8 @@ architecture a_PC_control of PC_control is
     signal endereco : unsigned(6 downto 0);
     signal dado : unsigned(16 downto 0);
     signal estado_maq: std_logic;
-    signal opcode: unsigned(3 downto 0);
+    signal opcode: unsigned(7 downto 0);
+    signal jump_en: std_logic;
 
 begin
     PC1: reg7bit port map( clk=>clk,
@@ -66,17 +67,17 @@ begin
 
     
     
-    resultado <=    resultado+1 when wr_en = '1' and rising_edge(clk) and estado_maq='1' else
-    dado(6 downto 0) when jump_en ='1' and wr_en = '1' and rising_edge(clk) and estado_maq='1' else
-    "0000000";
+    resultado <=    dado(6 downto 0) when jump_en ='1' and wr_en = '1' and rising_edge(clk) and estado_maq='1' else
+                    resultado+1 when wr_en = '1' and rising_edge(clk) and estado_maq='1' else
+                    resultado;
     
     top_lvl <= dado when estado_maq='0' else
                 "00000000000000000";
     
-    opcode<=dado(16 downto 13) when estado_maq = '1' else
-            "0000";
+    opcode<=dado(16 downto 9) when estado_maq = '1' else
+            "00000000";
     
-    jump_en<= '1' when opcode ="1111" else
+    jump_en <= '1' when opcode ="00000011" else
     '0';
     
 end architecture a_PC_control;

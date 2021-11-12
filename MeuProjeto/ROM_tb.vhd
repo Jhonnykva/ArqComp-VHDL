@@ -9,12 +9,12 @@ architecture a_ROM_tb of ROM_tb is
     component ROM
         port(   clk : in std_logic;
                 endereco : in unsigned(6 downto 0);--memória de programa = 4Kbytes 4000bytes = 32000 bits
-                dado : out signed(16 downto 0)    --32000/17=1882 endereços de 17 bits
+                dado : out unsigned(16 downto 0)    --32000/17=1882 endereços de 17 bits
             );
     end component;
 
     signal endereco : unsigned(6 downto 0);
-    signal dado : signed(16 downto 0);
+    signal dado : unsigned(16 downto 0);
 
     constant period_time : time := 100 ns;
     signal finished : std_logic := '0';
