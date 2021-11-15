@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity maquina_de_estados is
     port(
         clk: in std_logic;
-        reset: in std_logic;
+        rst: in std_logic;
         estado: out std_logic
     );
 end entity maquina_de_estados;
@@ -14,9 +14,9 @@ architecture a_maquina_de_estados of maquina_de_estados is
     signal estado_s: std_logic;
 
     begin
-    process (clk, reset)
+    process (clk, rst)
     begin
-        if reset = '1' then estado_s<='0';
+        if rst = '1' then estado_s<='0';
         elsif rising_edge(clk) then
             estado_s <= not estado_s;
         end if;
