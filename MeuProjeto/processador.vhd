@@ -133,6 +133,8 @@ architecture a_processador of processador is
     signal banco_out_1,banco_out_2,regA_out,regB_out,out_mux,out_op_1: signed(15 downto 0);
     signal out_op_2: STD_LOGIC;
     
+    signal in1:signed(15 downto 0);
+    
 begin
 
     state: maquina_de_estados port map(
@@ -218,7 +220,7 @@ begin
     mux_regA: mux1x2 port map(
         slt=>ALUsrcA,
         in0=>banco_out_1,
-        in1=>"00000000" & cte,
+        in1=>in1,
         out0=>out_mux
     );
     
@@ -235,7 +237,8 @@ begin
         end if;
     end process;
     
-    cte<=ir_out(7 downto 0);
+    cte<=signed(ir_out(7 downto 0));
+    in1<=signed("00000000" & ir_out(7 downto 0));
     --instruction <= rom_out when estado ="00" else "00000000000000000";
 
 end architecture ;
