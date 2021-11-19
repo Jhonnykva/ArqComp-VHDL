@@ -29,3 +29,15 @@ ghdl -a PC_control_tb.vhd
 ghdl -r PC_control_tb --vcd=PC_control_tb.vcd
 
 ghdl -a reg7bit.vhd
+
+ghdl -a uni_controle.vhd
+ghdl -a mux2x1.vhd
+ghdl -a reg7bit.vhd
+ghdl -a ROM.vhd
+ghdl -a reg16bit.vhd
+ghdl -a bancoreg.vhd
+ghdl -a ULA.vhd
+ghdl -a maquina_de_estados.vhd
+ghdl -a processador.vhd
+ghdl -a processador_tb.vhd
+ghdl -r processador_tb --vcd=processador.vcd
