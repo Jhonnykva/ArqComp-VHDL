@@ -11,6 +11,7 @@ architecture a_processador_tb of processador_tb is
         (
             clk          : IN STD_LOGIC ;
             rst          : IN STD_LOGIC ;
+            TL_estado    : OUT unsigned(1 downto 0);
             TL_PC        : OUT unsigned (6 downto 0);
             TL_instrucao : OUT unsigned (16 downto 0);
             TL_regA_out  : OUT signed (15 downto 0);
@@ -23,6 +24,7 @@ architecture a_processador_tb of processador_tb is
     signal finished : std_logic := '0';
     signal clk, reset : std_logic;
     
+    signal TL_estado : unsigned(1 downto 0);
     signal TL_PC: unsigned(6 downto 0);
     signal TL_instrucao: unsigned(16 downto 0);
     signal TL_regA_out, TL_regB_out, TL_ULA_out: signed(15 downto 0);
@@ -32,6 +34,7 @@ begin
     uut: processador port map (
         clk => clk,
         rst => reset,
+        TL_estado=>TL_estado,
         TL_PC=>TL_PC,
         TL_instrucao=>TL_instrucao,
         TL_regA_out=>TL_regA_out,

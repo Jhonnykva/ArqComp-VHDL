@@ -6,6 +6,7 @@ entity processador is
     port(
         clk,rst: in STD_LOGIC;
         
+        TL_estado: out unsigned(1 downto 0);
         TL_PC: out unsigned(6 downto 0);
         TL_instrucao: out unsigned(16 downto 0);
         TL_regA_out: out signed(15 downto 0);
@@ -246,6 +247,7 @@ begin
     cte<=signed(ir_out(7 downto 0));
     in1<=signed("00000000" & ir_out(7 downto 0));
     
+    TL_estado<= estado;
     TL_PC<=pc_out;
     TL_instrucao<=ir_out;
     TL_regA_out<=regA_out;
