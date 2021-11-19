@@ -235,6 +235,7 @@ begin
         end if;
     end process;
     
+    cte<=ir_out(7 downto 0);
     --instruction <= rom_out when estado ="00" else "00000000000000000";
 
 end architecture ;

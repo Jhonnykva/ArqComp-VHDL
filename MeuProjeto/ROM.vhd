@@ -13,7 +13,7 @@ architecture a_rom of rom is
     type mem is array (0 to 127) of unsigned(16 downto 0);--trocar futuramente 127 por 1881
     constant conteudo_rom : mem := (
         -- caso endereco => conteudo
-        0 => "00000011000010101",
+        0 => "00000001000000011",
         1 => "00000000000000011",
         2 => "00000000000000110",
         6 => "00000000000000001",
