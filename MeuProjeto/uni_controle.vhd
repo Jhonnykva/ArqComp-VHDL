@@ -28,7 +28,8 @@ begin
 
     opcode <= instruction(16 downto 9);
     
-    flag_C <= ula_out_2 when opcode="00000101" else flag_C;
+    flag_C <= ula_out_2 when opcode="00000101" else
+    '0' when opcode="00000111" else flag_C;
     
     jump_en <= '1' when opcode ="00000110" else 
     '1' when opcode="00001000" and flag_C='1' else
