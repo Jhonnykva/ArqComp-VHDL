@@ -60,7 +60,8 @@ architecture a_processador of processador is
             ALUsrcA: out std_logic;
             slt_reg_read_1: out unsigned(2 downto 0);
             slt_reg_read_2: out unsigned(2 downto 0);
-            slt_reg_write: out unsigned(2 downto 0)
+            slt_reg_write: out unsigned(2 downto 0);
+            ula_out_2: in STD_LOGIC
         );
     end component;
     
@@ -138,7 +139,7 @@ architecture a_processador of processador is
     signal ALUsrcA: std_logic;
     
     signal banco_out_1,banco_out_2,regA_out,regB_out,out_mux,out_op_1: signed(15 downto 0);
-    signal out_op_2: STD_LOGIC;
+    signal out_op_2: STD_LOGIC:='0';
     
     signal in1:signed(15 downto 0);
     
@@ -177,7 +178,8 @@ begin
         ALUsrcA =>ALUsrcA,
         slt_reg_read_1=>slt_reg_read_1,
         slt_reg_read_2=>slt_reg_read_2,
-        slt_reg_write=>slt_reg_write
+        slt_reg_write=>slt_reg_write,
+        ula_out_2=>out_op_2
     );
     
     ir: reg17bit port map(
@@ -231,21 +233,13 @@ begin
         out0=>out_mux
     );
     
-    process (rst, clk)
-    begin
-        if rst='1' then
-            pc_in<="0000000";
-        elsif rising_edge(clk) then
-            if jump_en = '0' then
-                pc_in<=pc_out +1;
-            else
-                pc_in<=rom_out(6 downto 0);
-            end if;
-        end if;
-    end process;
-    
     cte<=signed(ir_out(7 downto 0));
     in1<=signed("00000000" & ir_out(7 downto 0));
+    
+    pc_in <= pc_out + 1 when jump_en = '0' else
+    pc_out+1+rom_out(6 downto 0) when jump_en='1' and rom_out(16 downto 9)="00001000" else
+    rom_out(6 downto 0) when jump_en='1' else
+    "0000000";
     
     TL_estado<= estado;
     TL_PC<=pc_out;

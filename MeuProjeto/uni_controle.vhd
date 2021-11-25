@@ -7,6 +7,7 @@ entity uni_controle is
         clk, rst: in std_logic;
         instruction: in unsigned(16 downto 0);
         estado: in unsigned(1 downto 0);
+        ula_out_2: in STD_LOGIC;
         
         jump_en, pc_read, rom_read: out STD_LOGIC;
         
@@ -21,12 +22,18 @@ end entity uni_controle;
 architecture a_uni_controle of uni_controle is
     
     signal opcode: unsigned(7 downto 0);
+    signal flag_C: STD_LOGIC:='0';
 
 begin
 
     opcode <= instruction(16 downto 9);
     
-    jump_en <= '1' when opcode ="00000110" else '0';
+    flag_C <= ula_out_2 when opcode="00000101" else flag_C;
+    
+    jump_en <= '1' when opcode ="00000110" else 
+    '1' when opcode="00001000" and flag_C='1' else
+    '0';
+
     pc_read <= '1' when estado ="01" else '0';
     rom_read <= '1' when estado ="00" else '0';
     
@@ -34,7 +41,9 @@ begin
                         opcode = "00000100" or opcode = "00000101") 
                         and estado = "10" else '0';
     
-    slt_ula <= "01" when opcode = "00000101" else "00";
+    slt_ula <= "01" when opcode = "00000101" else 
+    "11" when opcode="00000111" else 
+    "00";
     
     ALUsrcA <= '1' when opcode = "00000001" or opcode = "00000101" else '0';
     
