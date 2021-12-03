@@ -12,6 +12,7 @@ entity uni_controle is
         jump_en, pc_read, rom_read: out STD_LOGIC;
         
         regWrite: out STD_LOGIC;
+        ramWrite: out std_logic;
         slt_ula: out unsigned(1 downto 0);
         ALUsrcA: out std_logic;
         slt_reg_read_1, slt_reg_read_2, slt_reg_write: out unsigned(2 downto 0)
