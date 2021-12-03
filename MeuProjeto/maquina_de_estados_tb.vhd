@@ -37,7 +37,7 @@ architecture a_maquina_de_estados_tb of maquina_de_estados_tb is
   
     sim_time_proc: process
     begin
-        wait for 400 ns;
+        wait for 800 ns;
         finished <= '1';
         wait;
     end process sim_time_proc;
