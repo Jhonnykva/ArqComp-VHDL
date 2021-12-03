@@ -59,6 +59,7 @@ architecture a_processador of processador is
             ramWWrite: out std_logic;
             slt_ula: out unsigned(1 downto 0);
             ALUsrcA: out std_logic;
+            ALUsrcB: out std_logic;
             slt_reg_read_1: out unsigned(2 downto 0);
             slt_reg_read_2: out unsigned(2 downto 0);
             slt_reg_write: out unsigned(2 downto 0);
@@ -147,9 +148,9 @@ architecture a_processador of processador is
     signal regWrite,ramWrite: STD_LOGIC;
     signal slt_ula: unsigned(1 downto 0);
     signal slt_reg_read_1, slt_reg_read_2, slt_reg_write: unsigned(2 downto 0);
-    signal ALUsrcA: std_logic;
+    signal ALUsrcA,ALUsrcB: std_logic;
     
-    signal banco_out_1,banco_out_2,regA_out,regB_out,out_mux,out_op_1: signed(15 downto 0);
+    signal banco_out_1,banco_out_2,regA_out,regB_out,out_mux,out_op_1,out_mux2: signed(15 downto 0);
     signal out_op_2: STD_LOGIC:='0';
     
     signal in1:signed(15 downto 0);
@@ -190,6 +191,7 @@ begin
         ramWrite=>ramWrite,
         slt_ula =>slt_ula,
         ALUsrcA =>ALUsrcA,
+        ALUsrcB =>ALUsrcB,
         slt_reg_read_1=>slt_reg_read_1,
         slt_reg_read_2=>slt_reg_read_2,
         slt_reg_write=>slt_reg_write,
@@ -242,14 +244,21 @@ begin
     
     mux_regA: mux1x2 port map(
         slt=>ALUsrcA,
-        in0=>banco_out_1,
+        in0=>regA_out,
         in1=>in1,
         out0=>out_mux
     );
 
+    mux_regB: mux1x2 port map(
+        slt=>ALUsrcB,
+        in0=>banco_out_2,
+        in1=>ram_out,
+        out0=>out_mux2
+    );
+
     ram: RAM port map(
         clk=>clk,
-        endereco=>rom_out(6 downto 0),
+        endereco=>banco_out_1(6 downto 0),
         wr_en =>ramWrite,
         dado_in =>out_op_1,
         dado_out=>ram_out
@@ -259,8 +268,8 @@ begin
     in1<=signed("00000000" & ir_out(7 downto 0));
     
     pc_in <= pc_out + 1 when jump_en = '0' else
-    pc_out+1+rom_out(6 downto 0) when jump_en='1' and rom_out(16 downto 9)="00001000" else
-    rom_out(6 downto 0) when jump_en='1' else
+    pc_out+1+ir_out(6 downto 0) when jump_en='1' and ir_out(16 downto 9)="00001000" else
+    ir_out(6 downto 0) when jump_en='1' else
     "0000000";
     
     TL_estado<= estado;
