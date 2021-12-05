@@ -56,8 +56,10 @@ architecture a_processador of processador is
             estado : in unsigned(1 downto 0);
             rom_read: out STD_LOGIC;
             regWrite: out STD_LOGIC;
+            ramWrite: out std_logic;
             slt_ula: out unsigned(1 downto 0);
             ALUsrcA: out std_logic;
+            ALUsrcB: out std_logic;
             slt_reg_read_1: out unsigned(2 downto 0);
             slt_reg_read_2: out unsigned(2 downto 0);
             slt_reg_write: out unsigned(2 downto 0);
@@ -122,6 +124,17 @@ architecture a_processador of processador is
             out0 : OUT signed (15 downto 0)
         );
     end component;
+
+    component RAM is
+        port
+        (
+            clk      : in std_logic;
+            endereco : in unsigned(6 downto 0);
+            wr_en    : in std_logic;
+            dado_in  : in signed(15 downto 0);
+            dado_out : out signed(15 downto 0) 
+        );
+    end component;
     
     signal estado: unsigned(1 downto 0);
     
@@ -133,15 +146,17 @@ architecture a_processador of processador is
     signal jump_en,rom_read: STD_LOGIC;
     
     signal cte: signed(7 downto 0);
-    signal regWrite: STD_LOGIC;
+    signal regWrite,ramWrite: STD_LOGIC;
     signal slt_ula: unsigned(1 downto 0);
     signal slt_reg_read_1, slt_reg_read_2, slt_reg_write: unsigned(2 downto 0);
-    signal ALUsrcA: std_logic;
+    signal ALUsrcA,ALUsrcB: std_logic;
     
-    signal banco_out_1,banco_out_2,regA_out,regB_out,out_mux,out_op_1: signed(15 downto 0);
+    signal banco_out_1,banco_out_2,regA_out,regB_out,out_mux,out_op_1,out_mux2: signed(15 downto 0);
     signal out_op_2: STD_LOGIC:='0';
     
     signal in1:signed(15 downto 0);
+
+    signal ram_out:signed(15 downto 0);
     
 begin
 
@@ -174,8 +189,10 @@ begin
         estado =>estado,
         rom_read=>rom_read,
         regWrite =>regWrite ,
+        ramWrite=>ramWrite,
         slt_ula =>slt_ula,
         ALUsrcA =>ALUsrcA,
+        ALUsrcB =>ALUsrcB,
         slt_reg_read_1=>slt_reg_read_1,
         slt_reg_read_2=>slt_reg_read_2,
         slt_reg_write=>slt_reg_write,
@@ -208,7 +225,7 @@ begin
     
     alu: ULA port map(
         in_termo_1=>out_mux,
-        in_termo_2=>regB_out,
+        in_termo_2=>out_mux2,
         select_op=>slt_ula,
         out_op_1=>out_op_1,
         out_op_2=>out_op_2
@@ -228,17 +245,32 @@ begin
     
     mux_regA: mux1x2 port map(
         slt=>ALUsrcA,
-        in0=>banco_out_1,
+        in0=>regA_out,
         in1=>in1,
         out0=>out_mux
     );
-    
+
+    mux_regB: mux1x2 port map(
+        slt=>ALUsrcB,
+        in0=>banco_out_2,
+        in1=>ram_out,
+        out0=>out_mux2
+    );
+
+    ram1: RAM port map(
+        clk=>clk,
+        endereco=>unsigned(banco_out_1(6 downto 0)),
+        wr_en =>ramWrite,
+        dado_in =>out_op_1,
+        dado_out=>ram_out
+    );
+
     cte<=signed(ir_out(7 downto 0));
     in1<=signed("00000000" & ir_out(7 downto 0));
     
     pc_in <= pc_out + 1 when jump_en = '0' else
-    pc_out+1+rom_out(6 downto 0) when jump_en='1' and rom_out(16 downto 9)="00001000" else
-    rom_out(6 downto 0) when jump_en='1' else
+    pc_out+1+ir_out(6 downto 0) when jump_en='1' and ir_out(16 downto 9)="00001000" else
+    ir_out(6 downto 0) when jump_en='1' else
     "0000000";
     
     TL_estado<= estado;
