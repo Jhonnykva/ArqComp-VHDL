@@ -32,6 +32,7 @@ begin
     
     out_op_1 <= in_termo_1+in_termo_2 when select_op="00" else
                 in_termo_2-in_termo_1 when select_op="01" else
+                in_termo_1+1 when select_op="10" else
                 "0000000000000000";
 
     out_op_2 <= soma_17(1) when select_op="00" else

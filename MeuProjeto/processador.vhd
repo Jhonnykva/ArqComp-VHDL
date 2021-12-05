@@ -56,7 +56,7 @@ architecture a_processador of processador is
             estado : in unsigned(1 downto 0);
             rom_read: out STD_LOGIC;
             regWrite: out STD_LOGIC;
-            ramWWrite: out std_logic;
+            ramWrite: out std_logic;
             slt_ula: out unsigned(1 downto 0);
             ALUsrcA: out std_logic;
             ALUsrcB: out std_logic;
@@ -131,9 +131,10 @@ architecture a_processador of processador is
             clk      : in std_logic;
             endereco : in unsigned(6 downto 0);
             wr_en    : in std_logic;
-            dado_in  : in unsigned(15 downto 0);
-            dado_out : out unsigned(15 downto 0) 
+            dado_in  : in signed(15 downto 0);
+            dado_out : out signed(15 downto 0) 
         );
+    end component;
     
     signal estado: unsigned(1 downto 0);
     
@@ -224,7 +225,7 @@ begin
     
     alu: ULA port map(
         in_termo_1=>out_mux,
-        in_termo_2=>regB_out,
+        in_termo_2=>out_mux2,
         select_op=>slt_ula,
         out_op_1=>out_op_1,
         out_op_2=>out_op_2
@@ -256,9 +257,9 @@ begin
         out0=>out_mux2
     );
 
-    ram: RAM port map(
+    ram1: RAM port map(
         clk=>clk,
-        endereco=>banco_out_1(6 downto 0),
+        endereco=>unsigned(banco_out_1(6 downto 0)),
         wr_en =>ramWrite,
         dado_in =>out_op_1,
         dado_out=>ram_out
